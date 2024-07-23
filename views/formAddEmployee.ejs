@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<body>
+    <div class="container">
+        <%- include('_navbar') %>
+        <h1 class="mb-3" style="text-align: center;">Add Employee</h1>
+        <h2 style="text-align: center;">Store Name: <%= datas.dataValues.name %></h2>
+        <%- include('_script') %>
+
+        
+        <form method="POST" action="/stores/<%= datas.id %>/employees/add" style="text-align: center;">
+            <div class="row">
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="firstName" name="firstName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" name="lastName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="dateOfBirth" class="form-label">Date Of Birth</label>
+                        <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth">
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label class="form-label">Education</label>
+                        <select class="form-select" aria-label="Default select example" name="education">
+                            <option selected disabled>--- Select ---</option>
+                            <% educations.forEach(education => { %>
+                                <option value="<%= education %>"><%= education %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="position" class="form-label">Position</label>
+                        <div class="col">
+                            <% positions.forEach(position => { %>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="<%= position %>">
+                                    <label style="margin: 0px 100px 0px 0px" class="form-check-label" for="inlineRadio1"><%= position %></label>
+                                </div>
+                            <% }) %>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="salary" class="form-label">Salary</label>
+                        <input type="number" class="form-control" id="salary" name="salary">
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Employee</button>
+        </form>
+    </div>
+</body>
+</html>

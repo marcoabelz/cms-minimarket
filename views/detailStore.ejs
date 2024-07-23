@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<body>
+    <%- include('_navbar') %>
+    <div class="container">
+        <% if (datas.Employees.length > 0) { %>
+            <div class="detail-store mb-3" style="text-align: center;">
+                <h1><%= datas.name %> Store's</h1>
+                <h3>Code: <%= datas.code %></h3>
+                <% if (deletedData) { %>
+                 <p style="color: red; font-weight: bold;"><%= deletedData %> removed</p>
+                <% } %>
+                <p>Click <a href="<%= datas.id %>/employees/add">here</a> to add an employee.</p>
+                <b>Employees Fee: <%= datas.sumSalary(datas.Employees)%></b>
+            </div>
+        <% } else  { %>
+            <div class="detail-store mb-3" style="text-align: center;">
+                <h1><%= datas.name %> Store's</h1>
+                <h3>Code: <%= datas.code %></h3>
+                <p>There is no employee yet</p>
+                <p>Click <a href="/stores/<%= datas.id %>/employees/add">here</a> to add an employee.</p>
+                <b>Employees Fee: -</b>
+            </div>
+        <% } %>
+
+        <% if (datas.Employees.length > 0) { %> 
+            <table class="table" style="border: 1px solid black;">
+                <thead>
+                  <tr>
+                    <th style="background-color: blue; text-align: center; border: 1px solid black;">First Name</th>
+                    <th style="background-color: blue; text-align: center; border: 1px solid black;">Last Name</th>
+                    <th style="background-color: blue; text-align: center; border: 1px solid black;">Age</th>
+                    <th style="background-color: blue; text-align: center; border: 1px solid black;">Education</th>
+                    <th style="background-color: blue; text-align: center; border: 1px solid black;">Position</th>
+                    <th style="background-color: blue; text-align: center; border: 1px solid black;">Salary</th>
+                    <th style="background-color: blue; text-align: center; border: 1px solid black;">Action</th>
+                  </tr>
+                  <% datas.Employees.forEach(data => { %>
+                    <tr>
+                        <td style="text-align: center; border: 1px solid black;"><%= data.firstName %></td>
+                        <td style="text-align: center; border: 1px solid black;"><%= data.lastName %></td>
+                        <td style="text-align: center; border: 1px solid black;"><%= data.age %></td>
+                        <td style="text-align: center; border: 1px solid black;"><%= data.education %></td>
+                        <td style="text-align: center; border: 1px solid black;"><%= data.position %></td>
+                        <td style="text-align: center; border: 1px solid black;"><%= currency_converter(data.salary) %></td>
+                        <td style="text-align: center; border: 1px solid black;">
+                            <button>
+                                <a style="text-decoration: none; color: black;" href="/stores/<%= data.StoreId %>/employees/<%= data.id %>/edit">Edit</a>
+                            </button>
+                            <button>
+                                <a style="text-decoration: none; color: black;" href="/stores/<%= data.StoreId %>/employees/<%= data.id %>/delete">Delete</a>
+                            </button>
+                        </td>
+                    </tr>
+                  <% }) %>
+                </thead>
+            </table>
+        <% } %>
+    </div>
+    <%- include('_script') %>
+</body>
+</html>

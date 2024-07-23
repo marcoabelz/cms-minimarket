@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<body>
+    <%- include('_navbar') %>
+    <div class="container">
+        <h1 style="text-align: center;">Employee List</h1>
+        <div style="text-align: center;" class="bposition">
+            <button>
+                <a style="text-decoration: none; color: black;" href="/employees">All</a>
+            </button>
+            <button>
+                <a style="text-decoration: none; color: black;" href="/employees?position=Staff">Staff</a>
+            </button>
+            <button>
+                <a style="text-decoration: none; color: black;" href="/employees?position=Supervisor">Supervisor</a>
+            </button>
+            <button>
+                <a style="text-decoration: none; color: black;" href="/employees?position=Manager">Manager</a>
+            </button>
+            <button>
+                <a style="text-decoration: none; color: black;" href="/employees?position=CEO">CEO</a>
+            </button>
+        </div>
+        <table class="table" style="border: 1px solid black;">
+            <thead>
+              <tr>
+                <th style="background-color: blue; text-align: center; border: 1px solid black;">Name</th>
+                <th style="background-color: blue; text-align: center; border: 1px solid black;">Position</th>
+                <th style="background-color: blue; text-align: center; border: 1px solid black;">Salary</th>
+                <th style="background-color: blue; text-align: center; border: 1px solid black;">Store's Code</th>
+                <th style="background-color: blue; text-align: center; border: 1px solid black;">Action</th>
+              </tr>
+              <% datas.forEach(data => { %>
+                <tr>
+                    <td style ="text-align: center; border: 1px solid black;"><%= `${data.firstName} ${data.lastName}` %></td>
+                    <td style ="text-align: center; border: 1px solid black;"><%= data.position %></td>
+                    <td style ="text-align: center; border: 1px solid black;"><%= currency_converter(data.salary) %></td>
+                    <td style ="text-align: center; border: 1px solid black;"><%= data.Store.code %></td>
+                    <td style ="text-align: center; border: 1px solid black;">
+                        <button>
+                            <a style="text-decoration: none; color: black;" href="/stores/<%= data.StoreId %>/employees/<%= data.id %>/delete">Delete</a> 
+                        </button>
+                    </td>
+                </tr>
+              <% }) %>
+            </thead>
+
+        </table>
+    </div>
+    <%- include('_script') %>
+</body>
+</html>

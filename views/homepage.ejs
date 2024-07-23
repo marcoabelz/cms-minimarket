@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<body>
+    <div class="container">
+        <%- include('_navbar') %>
+        <h1 style="text-align: center;">Betamidi CMS</h1>
+        <table class="table" style="border: 1px solid black;">
+            <thead>
+              <tr>
+                <th style="background-color: blue; text-align: center; border: 1px solid black;">Name</th>
+                <th style="background-color: blue; text-align: center; border: 1px solid black;">Code</th>
+                <th style="background-color: blue; text-align: center; border: 1px solid black;">Location</th>
+                <th style="background-color: blue; text-align: center; border: 1px solid black;">Category</th>
+                <th style="background-color: blue; text-align: center; border: 1px solid black;">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% datas.forEach(data => { %>
+                    <tr>
+                      <td style="border: 1px solid black;"><%= data.name %></td>
+                      <td style="border: 1px solid black;"><%= data.code %></td>
+                      <td style="border: 1px solid black;"><%= data.location %></td>
+                      <td style="border: 1px solid black;"><%= data.category %></td>
+                      <td style="text-align: center;">
+                          <a class="btn btn-secondary" href="/stores/<%= data.id %>">See Detail</a>
+                      </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+    <%- include('_script') %>
+</body>
+</html>
